@@ -1,0 +1,80 @@
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.2/hogan.min.js"></script>
+    <script src="../src/templates/templates.js"></script>
+    <script src="../src/scheduler.js"></script>
+    <!--
+        Alternatively load the dist version:
+        <script src="../dist/scheduler.js"></script>
+        Or
+        <script src="../dist/scheduler.min.js"></script>
+    -->
+    <link rel="stylesheet" href="../src/scheduler.css">
+</head>
+<body>
+    <p>Welcome to the scheduler test page</p>
+    <div id="scheduler"></div>
+    <p>Here's some text below the scheduler</p>
+    <button id="times-button">Get selected times</button>
+    <div id="times"></div>
+    <script>
+        $(document).ready(function(){
+            var list = [
+                {
+                    'name': 'Chewbacca',
+                    'appointments': [
+                        {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises'},
+                        {'start': '08:50', 'end': '10:10', 'title': 'Somehow Han Solo understands me'}
+                    ]
+                },
+                {
+                    'name': 'Darth Vader',
+                    'appointments': [
+                        {'start': '12:00', 'end': '13:30', 'title': 'Swing lightsaber in anger'},
+                        {'start': '14:30', 'end': '15:30', 'title': 'Test the death star superlaser'},
+                        {'start': '14:00', 'end': '14:30', 'title': 'Strangle people with lack of faith'}
+                    ]
+                },
+                {
+                    'name': 'The emperor',
+                    'appointments': [
+                        {'start': '15:00', 'end': '18:30', 'title': 'Execute order 66'},
+                        {'start': '06:00', 'end': '14:30', 'title': 'Apply moisturizer to deformed face'}
+                    ]
+                },
+                {
+                    'name': 'Jabba the hut',
+                    'appointments': [
+                        {'start': '10:00', 'end': '10:30', 'title': 'Oversee pod race'},
+                        {'start': '11:00', 'end': '11:20', 'title': 'Chill in the lounge and sacrifice prisoners'}
+                    ]
+                }
+            ];
+
+            var steps = [
+                '08:05',
+                '09:00',
+                '10:00',
+                '11:30',
+                '12:05',
+                '13:00',
+                '14:00',
+                '15:00',
+                '16:00',
+                '17:00'
+            ];
+
+            var $scheduler = $("#scheduler").schedulerjs({
+                'list': list,
+                'steps': steps
+            });
+
+            $("#times-button").click(function(){
+                var times = $scheduler.schedulerjs('selected');
+                $("#times").html(times.start + ' - ' + times.end);
+            });
+        });
+    </script>
+</body>
+</html>

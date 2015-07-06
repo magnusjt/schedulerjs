@@ -1,0 +1,49 @@
+<div class="sjs-name-col">
+    <div class="sjs-name-head"></div>
+    {{#names}}
+        <div class="sjs-name">{{name}}</div>
+    {{/names}}
+</div>
+<div class="sjs-app-col">
+    <div class="sjs-grid">
+        <div class="sjs-grid-row-head">
+            {{#grid-cols-head}}
+                <div class="sjs-grid-col-head" style="width:{{width}}px;">
+                    {{time}}
+                </div>
+            {{/grid-cols-head}}
+        </div>
+        {{#grid-rows}}
+            <div class="sjs-grid-row">
+                {{#grid-cols}}
+                    <div class="sjs-grid-col" style="width:{{width}}px;"></div>
+                {{/grid-cols}}
+            </div>
+        {{/grid-rows}}
+    </div>
+    <div class="sjs-grid-overlay">
+        <div class="sjs-grid-overlay-row-head"></div>
+        {{#grid-overlay-rows}}
+            <div class="sjs-grid-overlay-row">
+                {{#grid-overlay-cols}}
+                    <div class="sjs-grid-overlay-col" style="width:{{width}}px;margin-left:{{margin}}px;" title="{{title}} {{start}}-{{end}}">
+                        <span class="sjs-grid-overlay-col-title">{{title}}</span>
+                        <br />
+                        <span class="sjs-grid-overlay-col-time">{{start}}-{{end}}</span>
+                    </div>
+                {{/grid-overlay-cols}}
+            </div>
+        {{/grid-overlay-rows}}
+    </div>
+    <div class="sjs-fill-height"></div>
+    <div class="sjs-selector" data-selector="start">
+        <div class="sjs-selector-inner">
+            <div class="sjs-selector-text">Start</div>
+        </div>
+    </div>
+    <div class="sjs-selector" data-selector="end">
+        <div class="sjs-selector-inner">
+            <div class="sjs-selector-text">End</div>
+        </div>
+    </div>
+</div>

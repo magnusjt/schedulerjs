@@ -1,0 +1,135 @@
+/*
+NB:
+- Font-size 0 on rows to avoid gaps between the columns (inline-blocks)
+- Position relative needed for z-index
+- For ... ellipsis on overflowing text, need also white-space: no-wrap and overflow: hidden
+- On the rows, need white-space: no-wrap, because the columns are inline-blocks and would wrap instead of overflow
+*/
+
+.sjs-name-col{
+    width: 200px;
+    border-bottom: 1px #ccc solid;
+    float:left;
+}
+.sjs-name{
+    height: 40px;
+    padding: 5px 10px;
+    text-align: right;
+}
+.sjs-name:nth-child(2n){
+    background-color: #efefef;
+}
+.sjs-name-head{
+    height: 15px;
+    border-bottom: 1px #ccc solid;
+}
+
+.sjs-app-col{
+    border-left: 1px #ccc solid;
+
+    /* Position relative so that the grid overlay can use absolute positioning */
+    position: relative;
+    overflow-x: scroll;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sjs-grid{
+    z-index: 0;
+    border-bottom: 1px #ccc solid;
+    position: absolute;
+}
+.sjs-grid-row{
+    height: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0;
+}
+.sjs-grid-row:nth-child(2n){
+    background-color: #efefef;
+}
+.sjs-grid-row-head{
+    height: 15px;
+    white-space: nowrap;
+    font-size: 0;
+    border-bottom: 1px #ccc solid;
+}
+.sjs-grid-row-head:nth-child(2n){
+    background-color: #efefef;
+}
+.sjs-grid-col{
+    height: 50px;
+    display: inline-block;
+}
+.sjs-grid-col:nth-child(2n){
+    background-color: #efefef;
+}
+.sjs-grid-col-head{
+    height: 15px;
+    display: inline-block;
+    font-size: 12px;
+}
+.sjs-grid-col-head:nth-child(2n){
+    background-color: #efefef;
+}
+
+.sjs-grid-overlay{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.sjs-grid-overlay-row{
+    white-space: nowrap;
+    font-size: 0;
+    height: 50px;
+}
+.sjs-grid-overlay-row-head{
+    height: 15px;
+    border-bottom: 1px solid transparent;
+}
+.sjs-grid-overlay-col{
+    height: 50px;
+    display: inline-block;
+    background-color: rgba(255, 0, 0, 0.4);
+    vertical-align: top;
+    font-size: 12px;
+
+    /* Following three settings to make ... work in case of long text */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.sjs-grid-overlay-col-title{
+
+}
+.sjs-grid-overlay-col-time{
+
+}
+.sjs-selector{
+    margin-top: 16px;
+    width: 10px;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    position: absolute;
+    float: left;
+    cursor: pointer;
+    background-color: rgba(0, 0, 255, 0.2);
+}
+.sjs-selector-inner{
+    position: relative;
+    height: 100%;
+}
+.sjs-selector-text{
+    position: absolute;
+    bottom: 0;
+    margin-left: -15px;
+    border: 1px #ccc solid;
+    background-color: #fff;
+}

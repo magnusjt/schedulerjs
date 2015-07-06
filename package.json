@@ -1,0 +1,28 @@
+{
+  "name": "schedulerjs",
+  "version": "1.0.0",
+  "description": "jQuery schedule plugin and time picker",
+  "scripts": {
+    "deps": "npm install -g grunt && npm install -g grunt-cli && npm install -g bower && npm install && bower install && grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/magnusjt/schedulerjs.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/magnusjt/schedulerjs/issues"
+  },
+  "homepage": "https://github.com/magnusjt/schedulerjs",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.12.3",
+    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-hogan": "^0.3.0",
+    "hogan": "^1.0.2"
+  }
+}
