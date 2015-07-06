@@ -3,6 +3,9 @@
 A jQuery plugin that let's you display a schedule,
 and move time pickers within the schedule to find a time where everyone is free.
 
+### Demo
+http://magnustovslid.com/projects/schedulerjs
+
 ### Dependencies
 * jQuery
 * Hogan.js (from twitter)
