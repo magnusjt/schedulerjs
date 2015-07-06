@@ -265,10 +265,10 @@
         // Since the grid and grid overlay are absolutely positioned, they
         // don't take up any height. Therefore we find the height of the grid here,
         // and use a dummy div to fill the area with that height
-        // Also adding 50px to accomodate the selectors
+        // Also adding some pixels to accommodate the selectors
         var gridHeight = this.element.find('.sjs-grid').first().height();
         var extraHeightForSelectors = 30; /* Should be big enough to make room for the selector boxes */
-        var selectorsMarginTop = 16; /* Should equal the margin-top of the selectors */
+        var selectorsMarginTop = 15; /* Should equal the margin-top of the selectors */
         this.element.find('.sjs-fill-height').first().height(gridHeight + extraHeightForSelectors);
         this.element.find('.sjs-selector').height(gridHeight + extraHeightForSelectors - selectorsMarginTop);
     };

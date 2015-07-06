@@ -6,13 +6,17 @@ NB:
 - On the rows, need white-space: no-wrap, because the columns are inline-blocks and would wrap instead of overflow
 */
 
+.sjs-wrapper div{
+    box-sizing: border-box;
+}
+
 .sjs-name-col{
     width: 200px;
     border-bottom: 1px #ccc solid;
     float:left;
 }
 .sjs-name{
-    height: 40px;
+    height: 50px;
     padding: 5px 10px;
     text-align: right;
 }
@@ -70,7 +74,7 @@ NB:
     background-color: #efefef;
 }
 .sjs-grid-col-head{
-    height: 15px;
+    height: 14px;
     display: inline-block;
     font-size: 12px;
 }
@@ -112,7 +116,7 @@ NB:
 
 }
 .sjs-selector{
-    margin-top: 16px;
+    margin-top: 15px;
     width: 10px;
     top: 0;
     left: 0;
