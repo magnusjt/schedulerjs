@@ -13,7 +13,7 @@ http://magnustovslid.com/projects/schedulerjs
 ### Basic usage
 See the examples folder for usage.
 
-The basic setup is this:
+The basic setup is shown below. Note that currently all times must be represented in the format hh:ss.
 
 ````
 var list = [
@@ -33,6 +33,7 @@ var list = [
     }
 ];
 
+// Customize what time steps are shown in the scheduler
 var steps = [
     '08:05',
     '09:00',
@@ -50,4 +51,11 @@ var $scheduler = $("#scheduler").schedulerjs({
     'list': list,
     'steps': steps
 });
+````
+
+To retrieve the selected times:
+
+````
+var times = $scheduler.schedulerjs('selected');
+$("#times").html(times.start + ' - ' + times.end);
 ````
