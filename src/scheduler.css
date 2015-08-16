@@ -11,12 +11,12 @@ NB:
 }
 
 .sjs-name-col{
-    width: 200px;
+    width: 180px;
     border-bottom: 1px #ccc solid;
     float:left;
 }
 .sjs-name{
-    height: 50px;
+    height: 40px;
     padding: 5px 10px;
     text-align: right;
 }
@@ -49,7 +49,7 @@ NB:
     position: absolute;
 }
 .sjs-grid-row{
-    height: 50px;
+    height: 40px;
     overflow: hidden;
     white-space: nowrap;
     font-size: 0;
@@ -67,7 +67,7 @@ NB:
     background-color: #efefef;
 }
 .sjs-grid-col{
-    height: 50px;
+    height: 40px;
     display: inline-block;
 }
 .sjs-grid-col:nth-child(2n){
@@ -91,14 +91,14 @@ NB:
 .sjs-grid-overlay-row{
     white-space: nowrap;
     font-size: 0;
-    height: 50px;
+    height: 40px;
 }
 .sjs-grid-overlay-row-head{
     height: 15px;
     border-bottom: 1px solid transparent;
 }
 .sjs-grid-overlay-col{
-    height: 50px;
+    height: 40px;
     display: inline-block;
     background-color: rgba(255, 0, 0, 0.4);
     vertical-align: top;

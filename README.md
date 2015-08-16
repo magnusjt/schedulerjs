@@ -47,15 +47,37 @@ var steps = [
     '17:00'
 ];
 
+// Set the granularity of the time selectors (what nearest time they snap to)
+var snapTo = 5; // 5 minutes
+var pixelsPerHour = 180; // How wide an hour should be, in pixels
+var defaultStartTime = '09:00';
+var defaultEndTime = '11:00';
+
 var $scheduler = $("#scheduler").schedulerjs({
     'list': list,
-    'steps': steps
+    'steps': steps,
+    'snapTo': snapTo,
+    'pixelsPerHour': pixelsPerHour,
+    'start': defaultStartTime,
+    'end': defaultEndTime
 });
 ````
 
-To retrieve the selected times:
+Retrieve the selected times:
 
 ````
 var times = $scheduler.schedulerjs('selected');
 $("#times").html(times.start + ' - ' + times.end);
+````
+
+Change selectors programmatically:
+
+````
+var startTime = $scheduler.schedulerjs('start', '11:00');
+var endTime = $scheduler.schedulerjs('end', '11:30');
+
+// The return values are what time was actually set
+// Should equal what you put in, except they will snap
+// to whatever you set snapTo to.
+// Also, if out of range, they will snap into range.
 ````

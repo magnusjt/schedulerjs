@@ -24,8 +24,17 @@
         this.createView();
         this.setListeners();
 
-        this.selectedStartTime = this.minMinutes + 60;
-        this.selectedEndTime = this.minMinutes + 120;
+        if(this.opts.start !== undefined){
+            this.selectedStartTime = this.timeStrToMinutes(this.opts.start);
+        }else{
+            this.selectedStartTime = this.minMinutes + 60;
+        }
+        if(this.opts.end !== undefined){
+            this.selectedEndTime = this.timeStrToMinutes(this.opts.end);
+        }else{
+            this.selectedEndTime = this.minMinutes + 120;
+        }
+
         this.updateSelectors();
     }
 
@@ -42,6 +51,22 @@
                 'start': this.minutesToTimeStr(this.selectedStartTime),
                 'end': this.minutesToTimeStr(this.selectedEndTime)
             }
+        },
+        "start": function(startTime){
+            if(startTime !== undefined){
+                this.selectedStartTime = this.timeStrToMinutes(startTime);
+                this.updateSelectors();
+            }
+
+            return this.minutesToTimeStr(this.selectedStartTime);
+        },
+        "end": function(endTime){
+            if(endTime !== undefined){
+                this.selectedEndTime = this.timeStrToMinutes(endTime);
+                this.updateSelectors();
+            }
+
+            return this.minutesToTimeStr(this.selectedEndTime);
         }
     };
 
@@ -274,7 +299,7 @@
     };
 
     $.fn.schedulerjs = function(opts){
-        var args = arguments;
+        var args = Array.prototype.slice.call(arguments, 1);
         var retVal;
         var pluginName = 'schedulerjs';
 
@@ -294,7 +319,7 @@
 
             if(typeof opts !== 'object') {
                 if(plugin.public[opts]){
-                    retVal = plugin.public[opts].apply(plugin, Array.prototype.slice( args, 1 ));
+                    retVal = plugin.public[opts].apply(plugin, args);
                 }else{
                     $.error( 'Method ' +  opts + ' does not exist in ' + pluginName );
                 }

@@ -67,8 +67,15 @@
 
             var $scheduler = $("#scheduler").schedulerjs({
                 'list': list,
-                'steps': steps
+                'steps': steps,
+                'pixelsPerHour': 180,
+                'start': '09:30',
+                'end': '10:30'
             });
+
+            // Change time after initialization
+            //$scheduler.schedulerjs('start', '11:00');
+            //$scheduler.schedulerjs('end', '11:30');
 
             $("#times-button").click(function(){
                 var times = $scheduler.schedulerjs('selected');
