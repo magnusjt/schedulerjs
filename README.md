@@ -14,21 +14,23 @@ http://magnustovslid.com/projects/schedulerjs
 See the examples folder for usage.
 
 The basic setup is shown below. Note that currently all times must be represented in the format hh:ss.
+The class property refers to a css class of your choice. It allows you to set a different background
+color based on the type of appointment.
 
 ````
 var list = [
     {
         'name': 'Chewbacca',
         'appointments': [
-            {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises'},
+            {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises', 'class': 'meeting'},
         ]
     },
     {
         'name': 'Darth Vader',
         'appointments': [
-            {'start': '12:00', 'end': '13:30', 'title': 'Swing lightsaber in anger'},
-            {'start': '14:30', 'end': '15:30', 'title': 'Test the death star superlaser'},
-            {'start': '14:00', 'end': '14:30', 'title': 'Strangle people with lack of faith'}
+            {'start': '12:00', 'end': '13:30', 'title': 'Swing lightsaber in anger', 'class': 'meeting'},
+            {'start': '14:30', 'end': '15:30', 'title': 'Test the death star superlaser', 'class': 'meeting'},
+            {'start': '14:00', 'end': '14:30', 'title': 'Strangle people with lack of faith', 'class': 'meeting'}
         ]
     }
 ];
@@ -68,16 +70,25 @@ Retrieve the selected times:
 ````
 var times = $scheduler.schedulerjs('selected');
 $("#times").html(times.start + ' - ' + times.end);
+
+
+// Alternatively:
+var start = $scheduler.schedulerjs('start');
+var end = $scheduler.schedulerjs('end');
 ````
 
-Change selectors programmatically:
+Change selected times programmatically:
 
 ````
 var startTime = $scheduler.schedulerjs('start', '11:00');
 var endTime = $scheduler.schedulerjs('end', '11:30');
 
 // The return values are what time was actually set
-// Should equal what you put in, except they will snap
-// to whatever you set snapTo to.
-// Also, if out of range, they will snap into range.
+// Should equal what you put in
+````
+
+Update list content:
+
+````
+$scheduler.schedulerjs('update', list);
 ````

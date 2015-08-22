@@ -10,7 +10,18 @@
         Or
         <script src="../dist/scheduler.min.js"></script>
     -->
-    <link rel="stylesheet" href="../src/scheduler.css">
+    <link rel="stylesheet" href="../dist/scheduler.css">
+    <style>
+        .meeting{
+            background-color: rgba(255, 188, 0, 0.3);
+        }
+        .nonsense{
+            background-color: rgba(255, 18, 0, 0.3);
+        }
+        .racing{
+            background-color: rgba(0, 79, 255, 0.3);
+        }
+    </style>
 </head>
 <body>
     <p>Welcome to the scheduler test page</p>
@@ -24,30 +35,30 @@
                 {
                     'name': 'Chewbacca',
                     'appointments': [
-                        {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises'},
-                        {'start': '08:50', 'end': '10:10', 'title': 'Somehow Han Solo understands me'}
+                        {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises',             'class': 'nonsense'},
+                        {'start': '08:50', 'end': '10:10', 'title': 'Somehow Han Solo understands me', 'class': 'nonsense'}
                     ]
                 },
                 {
                     'name': 'Darth Vader',
                     'appointments': [
-                        {'start': '12:00', 'end': '13:30', 'title': 'Swing lightsaber in anger'},
+                        {'start': '12:00', 'end': '13:30', 'title': 'Swing lightsaber in anger', 'class': 'meeting'},
                         {'start': '14:30', 'end': '15:30', 'title': 'Test the death star superlaser'},
-                        {'start': '14:00', 'end': '14:30', 'title': 'Strangle people with lack of faith'}
+                        {'start': '14:00', 'end': '14:30', 'title': 'Strangle people with lack of faith', 'class': 'meeting'}
                     ]
                 },
                 {
                     'name': 'The emperor',
                     'appointments': [
-                        {'start': '15:00', 'end': '18:30', 'title': 'Execute order 66'},
-                        {'start': '06:00', 'end': '14:30', 'title': 'Apply moisturizer to deformed face'}
+                        {'start': '15:00', 'end': '18:30', 'title': 'Execute order 66',                   'class': 'meeting'},
+                        {'start': '06:00', 'end': '14:30', 'title': 'Apply moisturizer to deformed face', 'class': 'meeting'}
                     ]
                 },
                 {
                     'name': 'Jabba the hut',
                     'appointments': [
-                        {'start': '10:00', 'end': '10:30', 'title': 'Oversee pod race'},
-                        {'start': '11:00', 'end': '11:20', 'title': 'Chill in the lounge and sacrifice prisoners'}
+                        {'start': '10:00', 'end': '10:30', 'title': 'Oversee pod race',                            'class': 'racing'},
+                        {'start': '11:00', 'end': '11:20', 'title': 'Chill in the lounge and sacrifice prisoners', 'class': 'meeting'}
                     ]
                 }
             ];
@@ -74,13 +85,22 @@
             });
 
             // Change time after initialization
-            //$scheduler.schedulerjs('start', '11:00');
-            //$scheduler.schedulerjs('end', '11:30');
+            $scheduler.schedulerjs('start', '11:00');
+            $scheduler.schedulerjs('end', '11:30');
 
             $("#times-button").click(function(){
                 var times = $scheduler.schedulerjs('selected');
                 $("#times").html(times.start + ' - ' + times.end);
             });
+
+            $scheduler.schedulerjs('update', [
+                {
+                    name: 'hello',
+                    appointments: [
+                        {start: '10:00', end: '11:00', title: 'myesh'}
+                    ]
+                }
+            ]);
         });
     </script>
 </body>

@@ -22,16 +22,17 @@ module.exports = function(grunt) {
                 }
             }
         },
-        copy:{
-            copyCss:{
-                src: ['src/scheduler.css'],
-                dest: 'dist/scheduler.css'
+        less:{
+            compileLess:{
+                files:{
+                    'dist/scheduler.css': ['src/scheduler.less']
+                }
             }
         },
         cssmin:{
             minifyCss:{
                 files: {
-                    'dist/scheduler.min.css': ['src/scheduler.css']
+                    'dist/scheduler.min.css': ['dist/scheduler.css']
                 }
             }
         }
@@ -43,6 +44,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
-    grunt.registerTask('default', ['hogan', 'concat', 'copy', 'uglify', 'cssmin']);
+    grunt.registerTask('default', ['hogan', 'concat', 'less', 'uglify', 'cssmin']);
 };

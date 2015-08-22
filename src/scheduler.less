@@ -1,0 +1,190 @@
+/*
+NB:
+- Font-size 0 on rows to avoid gaps between the columns (inline-blocks)
+- Position relative needed for z-index
+- For ... ellipsis on overflowing text, need also white-space: no-wrap and overflow: hidden
+- On the rows, need white-space: no-wrap, because the columns are inline-blocks and would wrap instead of overflow
+*/
+@row-height: 40px;
+@row-top-height: 15px;
+@col-vertical-padding: 2px;
+@col-horizontal-padding: 3px;
+@grid-bg-color: #f9f9f9;
+@border-color: #ddd;
+
+.sjs-wrapper{
+  color: #333;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  line-height: 1.42857143;
+
+  *{
+    box-sizing: border-box;
+  }
+
+  a{
+    color: #333;
+    text-decoration: none;
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+.sjs-name-col{
+  border-bottom: 1px solid @border-color;
+  text-align: center;
+  float:left;
+}
+.sjs-name{
+  height: @row-height;
+  padding: 5px 15px;
+
+  line-height: (@row-height - 10); // Subtract padding. Line height to fill the entire contents for vertical align
+  vertical-align: middle;
+  max-width: 200px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sjs-name:nth-child(2n){
+  background-color: @grid-bg-color;
+}
+.sjs-name-head{
+  height: @row-top-height;
+  border-bottom: 1px solid @border-color;
+}
+
+.sjs-app-col{
+  border-left: 1px solid @border-color;
+
+  position: relative; // Position relative so that it is possible to use position absolute for the inside grid
+  overflow-x: scroll;
+
+  // Disable select inside the app, as it messes with dragging functionality
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sjs-grid{
+  z-index: 0;
+  border-bottom: 1px solid @border-color;
+  position: absolute;
+}
+.sjs-grid-row{
+  height: @row-height;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0;
+}
+.sjs-grid-row:nth-child(2n){
+  background-color: @grid-bg-color;
+}
+.sjs-grid-row-head{
+  height: @row-top-height;
+  white-space: nowrap;
+  font-size: 0;
+  border-bottom: 1px solid @border-color;
+}
+.sjs-grid-row-head:nth-child(2n){
+  background-color: @grid-bg-color;
+}
+.sjs-grid-col{
+  height: @row-height;
+  padding: @col-vertical-padding @col-horizontal-padding;
+  display: inline-block;
+}
+.sjs-grid-col:nth-child(2n){
+  background-color: @grid-bg-color;
+}
+.sjs-grid-col-head{
+  height: (@row-top-height - 1); // Subtract border size
+  display: inline-block;
+  font-size: 12px;
+}
+.sjs-grid-col-head:nth-child(2n){
+  background-color: @grid-bg-color;
+}
+
+.sjs-grid-overlay{
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.sjs-grid-overlay-row{
+  height: @row-height;
+  white-space: nowrap;
+  font-size: 0; // Avoid default spacing between inline-blocks
+}
+.sjs-grid-overlay-row-head{
+  height: @row-top-height;
+  border-bottom: 1px solid transparent;
+}
+.sjs-grid-overlay-col{
+  height: @row-height;
+  padding: @col-vertical-padding @col-horizontal-padding;
+  display: inline-block;
+  background-color: rgba(255, 18, 0, 0.3);
+  vertical-align: top;
+  font-size: 12px;
+
+  /* Following three settings to make ... work in case of long text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sjs-grid-overlay-col-title{
+
+}
+.sjs-grid-overlay-col-time{
+
+}
+.sjs-selector{
+  margin-top: @row-top-height;
+  cursor: move;
+  background-color: rgba(0, 0, 255, 0.2);
+
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 3;
+}
+
+.sjs-selector-edge{
+  width: 15px;
+  cursor: col-resize;
+
+  height: 100%;
+  top: 0;
+  position: absolute;
+  z-index: 3;
+}
+.sjs-selector-left{
+  left: 0;
+}
+.sjs-selector-right{
+  right: 0;
+}
+
+.sjs-selector-inner{
+  position: relative;
+  height: 100%;
+}
+.sjs-selector-text{
+  position: absolute;
+  white-space: nowrap;
+  padding: 2px;
+  height: 22px;
+  width: 100%;
+  bottom: 0;
+  background-color: #fff;
+  text-align: center;
+  border-top: 1px solid @border-color;
+}

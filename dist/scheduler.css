@@ -5,135 +5,156 @@ NB:
 - For ... ellipsis on overflowing text, need also white-space: no-wrap and overflow: hidden
 - On the rows, need white-space: no-wrap, because the columns are inline-blocks and would wrap instead of overflow
 */
-
-.sjs-wrapper div{
-    box-sizing: border-box;
+.sjs-wrapper {
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.42857143;
 }
-
-.sjs-name-col{
-    width: 180px;
-    border-bottom: 1px #ccc solid;
-    float:left;
+.sjs-wrapper * {
+  box-sizing: border-box;
 }
-.sjs-name{
-    height: 40px;
-    padding: 5px 10px;
-    text-align: right;
+.sjs-wrapper a {
+  color: #333;
+  text-decoration: none;
 }
-.sjs-name:nth-child(2n){
-    background-color: #efefef;
+.sjs-wrapper a:hover {
+  text-decoration: underline;
 }
-.sjs-name-head{
-    height: 15px;
-    border-bottom: 1px #ccc solid;
+.sjs-name-col {
+  border-bottom: 1px solid #dddddd;
+  text-align: center;
+  float: left;
 }
-
-.sjs-app-col{
-    border-left: 1px #ccc solid;
-
-    /* Position relative so that the grid overlay can use absolute positioning */
-    position: relative;
-    overflow-x: scroll;
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.sjs-name {
+  height: 40px;
+  padding: 5px 15px;
+  line-height: 30px;
+  vertical-align: middle;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-.sjs-grid{
-    z-index: 0;
-    border-bottom: 1px #ccc solid;
-    position: absolute;
+.sjs-name:nth-child(2n) {
+  background-color: #f9f9f9;
 }
-.sjs-grid-row{
-    height: 40px;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: 0;
+.sjs-name-head {
+  height: 15px;
+  border-bottom: 1px solid #dddddd;
 }
-.sjs-grid-row:nth-child(2n){
-    background-color: #efefef;
+.sjs-app-col {
+  border-left: 1px solid #dddddd;
+  position: relative;
+  overflow-x: scroll;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-.sjs-grid-row-head{
-    height: 15px;
-    white-space: nowrap;
-    font-size: 0;
-    border-bottom: 1px #ccc solid;
+.sjs-grid {
+  z-index: 0;
+  border-bottom: 1px solid #dddddd;
+  position: absolute;
 }
-.sjs-grid-row-head:nth-child(2n){
-    background-color: #efefef;
+.sjs-grid-row {
+  height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0;
 }
-.sjs-grid-col{
-    height: 40px;
-    display: inline-block;
+.sjs-grid-row:nth-child(2n) {
+  background-color: #f9f9f9;
 }
-.sjs-grid-col:nth-child(2n){
-    background-color: #efefef;
+.sjs-grid-row-head {
+  height: 15px;
+  white-space: nowrap;
+  font-size: 0;
+  border-bottom: 1px solid #dddddd;
 }
-.sjs-grid-col-head{
-    height: 14px;
-    display: inline-block;
-    font-size: 12px;
+.sjs-grid-row-head:nth-child(2n) {
+  background-color: #f9f9f9;
 }
-.sjs-grid-col-head:nth-child(2n){
-    background-color: #efefef;
+.sjs-grid-col {
+  height: 40px;
+  padding: 2px 3px;
+  display: inline-block;
 }
-
-.sjs-grid-overlay{
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
+.sjs-grid-col:nth-child(2n) {
+  background-color: #f9f9f9;
 }
-.sjs-grid-overlay-row{
-    white-space: nowrap;
-    font-size: 0;
-    height: 40px;
+.sjs-grid-col-head {
+  height: 14px;
+  display: inline-block;
+  font-size: 12px;
 }
-.sjs-grid-overlay-row-head{
-    height: 15px;
-    border-bottom: 1px solid transparent;
+.sjs-grid-col-head:nth-child(2n) {
+  background-color: #f9f9f9;
 }
-.sjs-grid-overlay-col{
-    height: 40px;
-    display: inline-block;
-    background-color: rgba(255, 0, 0, 0.4);
-    vertical-align: top;
-    font-size: 12px;
-
-    /* Following three settings to make ... work in case of long text */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.sjs-grid-overlay {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-.sjs-grid-overlay-col-title{
-
+.sjs-grid-overlay-row {
+  height: 40px;
+  white-space: nowrap;
+  font-size: 0;
 }
-.sjs-grid-overlay-col-time{
-
+.sjs-grid-overlay-row-head {
+  height: 15px;
+  border-bottom: 1px solid transparent;
 }
-.sjs-selector{
-    margin-top: 15px;
-    width: 10px;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    position: absolute;
-    float: left;
-    cursor: pointer;
-    background-color: rgba(0, 0, 255, 0.2);
+.sjs-grid-overlay-col {
+  height: 40px;
+  padding: 2px 3px;
+  display: inline-block;
+  background-color: rgba(255, 18, 0, 0.3);
+  vertical-align: top;
+  font-size: 12px;
+  /* Following three settings to make ... work in case of long text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.sjs-selector-inner{
-    position: relative;
-    height: 100%;
+.sjs-selector {
+  margin-top: 15px;
+  cursor: move;
+  background-color: rgba(0, 0, 255, 0.2);
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 3;
 }
-.sjs-selector-text{
-    position: absolute;
-    bottom: 0;
-    margin-left: -15px;
-    border: 1px #ccc solid;
-    background-color: #fff;
+.sjs-selector-edge {
+  width: 15px;
+  cursor: col-resize;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  z-index: 3;
+}
+.sjs-selector-left {
+  left: 0;
+}
+.sjs-selector-right {
+  right: 0;
+}
+.sjs-selector-inner {
+  position: relative;
+  height: 100%;
+}
+.sjs-selector-text {
+  position: absolute;
+  white-space: nowrap;
+  padding: 2px;
+  height: 22px;
+  width: 100%;
+  bottom: 0;
+  background-color: #fff;
+  text-align: center;
+  border-top: 1px solid #dddddd;
 }
