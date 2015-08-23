@@ -9,11 +9,9 @@
         /** Largest time step in minutes */
         this.maxMinutes = 1440;
 
-        /** Selected start time in page offset pixels */
-        this.selectedStart = 0;
+        this.start = 0;
 
-        /** Selected time length in pixels */
-        this.selectedWidth = 0;
+        this.end = 0;
 
         /** List of time steps given in minutes */
         this.stepsMinutes = [];
@@ -24,14 +22,14 @@
         this.createView();
         this.setListeners();
 
-        this.selectedStart = this.minMinutes + 60;
-        this.selectedWidth = 60;
+        this.start = this.minMinutes + 60;
+        this.end = this.start + 60;
 
         if(this.opts.start !== undefined){
-            this.selectedStart = this.timeStrToPageOffset(this.opts.start);
+            this.start = this.timeStrToMinutes(this.opts.start);
         }
         if(this.opts.end !== undefined){
-            this.selectedWidth = this.timeStrToPageOffset(this.opts.end) - this.selectedStart;
+            this.end = this.timeStrToMinutes(this.opts.end);
         }
 
         this.updateSelector();
@@ -47,35 +45,30 @@
     Scheduler.prototype.public = {
         "selected": function(){
             return {
-                'start': this.pageOffsetToTimeStr(this.selectedStart),
-                'end': this.pageOffsetToTimeStr(this.selectedStart + this.selectedWidth)
+                'start': this.minutesToTimeStr(this.start),
+                'end': this.minutesToTimeStr(this.end)
             }
         },
         "start": function(startTime){
             if(startTime !== undefined){
-                this.selectedStart = this.timeStrToPageOffset(startTime);
+                this.start = this.timeStrToMinutes(startTime);
                 this.updateSelector();
             }
 
-            return this.pageOffsetToTimeStr(this.selectedStart);
+            return this.minutesToTimeStr(this.start);
         },
         "end": function(endTime){
             if(endTime !== undefined){
-                this.selectedWidth = this.timeStrToPageOffset(endTime) - this.selectedStart;
+                this.end = this.timeStrToMinutes(endTime);
                 this.updateSelector();
             }
 
-            return this.pageOffsetToTimeStr(this.selectedStart + this.selectedWidth);
+            return this.minutesToTimeStr(this.end);
         },
         "update": function(list){
             this.nameList = [];
             this.opts.list = list;
-            // When the view updates, the page offset values do
-            // not reflect the correct amount of minutes anymore.
-            // Therefore we do a conversion here
-            var prevStartMinutes = this.pageOffsetToMinutes(this.selectedStart);
             this.createView();
-            this.selectedStart = this.minutesToPageOffset(prevStartMinutes);
             this.updateSelector();
         }
     };
@@ -91,16 +84,16 @@
         this.element.on("mousemove", function(e) {
             var newStart, newEnd;
             if($selector){
-                newStart = e.pageX - offset;
-                that.moveSelector(newStart - that.selectedStart);
+                newStart = that.pageOffsetToMinutes(e.pageX - offset);
+                that.moveSelector(newStart - that.start);
                 that.updateSelector();
             }else if($edgeLeft){
-                newStart = e.pageX - offset;
-                that.resizeSelectorLeft(newStart - that.selectedStart);
+                newStart = that.pageOffsetToMinutes(e.pageX - offset);
+                that.resizeSelectorLeft(newStart - that.start);
                 that.updateSelector();
             }else if($edgeRight){
-                newEnd = e.pageX - offset;
-                that.resizeSelectorRight(newEnd - (that.selectedStart+that.selectedWidth));
+                newEnd = that.pageOffsetToMinutes(e.pageX - offset);
+                that.resizeSelectorRight(newEnd - that.end);
                 that.updateSelector();
             }
         });
@@ -113,7 +106,6 @@
             $edgeRight = null;
             offset = e.offsetX;
         });
-
         this.element.on('mousedown', '.sjs-selector-left', function(e){
             e.stopPropagation();
             $selector = null;
@@ -121,7 +113,6 @@
             $edgeRight = null;
             offset = e.offsetX;
         });
-
         this.element.on('mousedown', '.sjs-selector-right', function(e){
             e.stopPropagation();
             $selector = null;
@@ -151,80 +142,68 @@
     Scheduler.prototype.updateSelector = function(){
         var $selector = this.element.find('.sjs-selector');
 
-        $selector.offset({left: this.selectedStart});
-        $selector.width(this.selectedWidth);
+        $selector.offset({left: this.minutesToPageOffset(this.start)});
+        $selector.width(this.minutesToPixels(this.end-this.start));
 
         $selector.find('.sjs-selector-text').html(
-            this.pageOffsetToTimeStr(this.selectedStart) +
+            this.minutesToTimeStr(this.start) +
             ' - ' +
-            this.pageOffsetToTimeStr(this.selectedStart+this.selectedWidth)
+            this.minutesToTimeStr(this.end)
         );
     };
 
     Scheduler.prototype.snapSelector = function(){
-        var startMinutes = this.pageOffsetToMinutes(this.selectedStart);
-        var endMinutes = this.pageOffsetToMinutes(this.selectedStart + this.selectedWidth);
-
-        var startSnapOffset = startMinutes%this.opts.snapTo;
-        var endSnapOffset = endMinutes%this.opts.snapTo;
+        var startSnapOffset = this.start%this.opts.snapTo;
+        var endSnapOffset = this.end%this.opts.snapTo;
 
         startSnapOffset > this.opts.snapTo/2 ?
-            startMinutes += this.opts.snapTo - startSnapOffset :
-            startMinutes -= startSnapOffset;
+            this.start += this.opts.snapTo - startSnapOffset :
+            this.start -= startSnapOffset;
 
         endSnapOffset > this.opts.snapTo/2 ?
-            endMinutes += this.opts.snapTo - endSnapOffset :
-            endMinutes -= endSnapOffset;
+            this.end += this.opts.snapTo - endSnapOffset :
+            this.end -= endSnapOffset;
 
-        this.selectedStart = this.minutesToPageOffset(startMinutes);
-        this.selectedWidth = this.minutesToPageOffset(endMinutes) - this.selectedStart;
         this.updateSelector();
     };
 
-    Scheduler.prototype.resizeSelectorLeft = function(deltaPixels){
-        var targetStart = this.selectedStart + deltaPixels;
-        var targetWidth = this.selectedWidth - deltaPixels;
-        var targetStartMinutes = this.pageOffsetToMinutes(targetStart);
-        var targetWidthMinutes = this.pixelsToMinutes(targetWidth);
+    Scheduler.prototype.resizeSelectorLeft = function(deltaMinutes){
+       this.start += deltaMinutes;
 
-        if(targetStartMinutes < this.minMinutes){
-            targetWidthMinutes -= this.minMinutes - targetStartMinutes;
-            targetStartMinutes = this.minMinutes;
+        if(this.start < this.minMinutes){
+            this.start = this.minMinutes;
         }
-        if(targetWidthMinutes < this.opts.snapTo){
-            targetWidthMinutes = this.opts.snapTo;
+        if(this.end - this.start < this.opts.snapTo){
+            this.start = this.end - this.opts.snapTo;
         }
-
-        this.selectedStart = this.minutesToPageOffset(targetStartMinutes);
-        this.selectedWidth = this.minutesToPixels(targetWidthMinutes);
     };
-    Scheduler.prototype.resizeSelectorRight = function(deltaPixels){
-        var targetWidth = this.selectedWidth + deltaPixels;
-        var targetStartMinutes = this.pageOffsetToMinutes(this.selectedStart);
-        var targetWidthMinutes = this.pixelsToMinutes(targetWidth);
+    Scheduler.prototype.resizeSelectorRight = function(deltaMinutes){
+        this.end += deltaMinutes;
 
-        if(targetStartMinutes + targetWidthMinutes > this.maxMinutes){
-            targetWidthMinutes = this.maxMinutes - targetStartMinutes;
+        if(this.end > this.maxMinutes){
+            this.end = this.maxMinutes;
         }
-        if(targetWidthMinutes < this.opts.snapTo){
-            targetWidthMinutes = this.opts.snapTo;
+        if(this.end - this.start < this.opts.snapTo){
+            this.end = this.start + this.opts.snapTo;
         }
-
-        this.selectedWidth = this.minutesToPixels(targetWidthMinutes);
     };
-    Scheduler.prototype.moveSelector = function(deltaPixels){
-        var targetStart = this.selectedStart + deltaPixels;
-        var targetStartMinutes = this.pageOffsetToMinutes(targetStart);
-        var targetWidthMinutes = this.pixelsToMinutes(this.selectedWidth);
+    Scheduler.prototype.moveSelector = function(deltaMinutes){
+        this.start += deltaMinutes;
+        this.end += deltaMinutes;
 
-        if(targetStartMinutes < this.minMinutes){
-            targetStartMinutes = this.minMinutes;
-        }
-        if(targetStartMinutes + targetWidthMinutes > this.maxMinutes){
-            targetStartMinutes = this.maxMinutes - targetWidthMinutes;
+        if(this.start < this.minMinutes){
+            this.end += this.minMinutes - this.start;
+            this.start = this.minMinutes;
         }
 
-        this.selectedStart = this.minutesToPageOffset(targetStartMinutes);
+        if(this.end > this.maxMinutes){
+            this.start += this.maxMinutes - this.end;
+            this.end = this.maxMinutes;
+        }
+
+        if(this.end - this.start < this.opts.snapTo){
+            this.end = this.start + this.opts.snapTo;
+        }
     };
 
     Scheduler.prototype.pageOffsetToTimeStr = function(pageOffset){
