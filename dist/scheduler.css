@@ -120,6 +120,9 @@ NB:
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.sjs-grid-overlay-col-clickable {
+  cursor: pointer;
+}
 .sjs-selector {
   margin-top: 15px;
   cursor: move;

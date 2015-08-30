@@ -19,6 +19,8 @@
         /** List of names with appointments */
         this.nameList = [];
 
+        this.payloadById = {};
+
         this.createView();
         this.setListeners();
 
@@ -39,6 +41,8 @@
         'pixelsPerHour': 200,
         'snapTo': 5,
         'steps': ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
+        'headName': 'Names',
+        'onClickAppointment': function(){},
         'list': []
     };
 
@@ -67,9 +71,19 @@
         },
         "update": function(list){
             this.nameList = [];
+            this.payloadById = {};
             this.opts.list = list;
             this.createView();
             this.updateSelector();
+        },
+        "showSelector": function(){
+            this.element.find('.sjs-selector').show();
+        },
+        "hideSelector": function(){
+            this.element.find('.sjs-selector').hide();
+        },
+        "toggleSelector": function(){
+            this.element.find('.sjs-selector').toggle();
         }
     };
 
@@ -135,6 +149,13 @@
                 $selector = null;
                 $edgeLeft = null;
                 $edgeRight = null;
+            }
+        });
+
+        this.element.on('click', '.sjs-grid-overlay-col', function(e){
+            var payloadId = $(this).data('payload-id');
+            if(that.payloadById.hasOwnProperty(payloadId) && that.payloadById[payloadId] !== undefined){
+                that.opts.onClickAppointment(that.payloadById[payloadId]);
             }
         });
     };
@@ -256,6 +277,7 @@
      */
     Scheduler.prototype.getGridOverlayRowData = function(){
         var gridOverlayRows = [];
+        var payloadId = 0;
         for (var i = 0; i <  this.opts.list.length; i++) {
             var prevEnd = this.minMinutes;
 
@@ -283,14 +305,27 @@
                 var lengthSinceLast = minutesStart - prevEnd;
                 prevEnd = minutesEnd;
 
+                var className = '';
+                if(appointment.payload !== undefined){
+                    className += 'sjs-grid-overlay-col-clickable ';
+                }
+                if(appointment.class !== undefined){
+                    className += appointment.class;
+                }
+
+                this.payloadById[payloadId] = appointment.payload;
+
                 gridOverlayCols.push({
                     'width': this.minutesToPixels(length),
                     'margin': this.minutesToPixels(lengthSinceLast),
-                    'class': appointment.class === undefined ? '' : appointment.class,
+                    'class': className,
                     'title': appointment.title,
                     'start': appointment.start,
-                    'end': appointment.end
+                    'end': appointment.end,
+                    'payloadId': payloadId
                 });
+
+                payloadId++;
             }
 
             gridOverlayRows.push({
@@ -325,6 +360,7 @@
 
         this.element.html(schedulerjsTemplates.layout({
             'names': this.nameList,
+            'head-name': this.opts.headName,
             'grid-cols-head': gridColsHead,
             'grid-rows': gridRows,
             'grid-overlay-rows': this.getGridOverlayRowData()

@@ -22,7 +22,7 @@ var list = [
     {
         'name': 'Chewbacca',
         'appointments': [
-            {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises', 'class': 'meeting'},
+            {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises', 'class': 'meeting', 'payload': {myId: 1}},
         ]
     },
     {
@@ -52,8 +52,12 @@ var steps = [
 // Set the granularity of the time selectors (what nearest time they snap to)
 var snapTo = 5; // 5 minutes
 var pixelsPerHour = 180; // How wide an hour should be, in pixels
+var headName = 'Names'; // Text displayed on top of the list of names
 var defaultStartTime = '09:00';
 var defaultEndTime = '11:00';
+var onClickAppointment = function(payload){
+    // Do something with the payload
+};
 
 var $scheduler = $("#scheduler").schedulerjs({
     'list': list,
@@ -61,7 +65,9 @@ var $scheduler = $("#scheduler").schedulerjs({
     'snapTo': snapTo,
     'pixelsPerHour': pixelsPerHour,
     'start': defaultStartTime,
-    'end': defaultEndTime
+    'end': defaultEndTime,
+    'headName': headName,
+    'onClickAppointment': onClickAppointment
 });
 ````
 
@@ -91,4 +97,12 @@ Update list content:
 
 ````
 $scheduler.schedulerjs('update', list);
+````
+
+Show/hide/toggle time selector:
+
+````
+$scheduler.schedulerjs('toggleSelector');
+$scheduler.schedulerjs('showSelector');
+$scheduler.schedulerjs('hideSelector');
 ````

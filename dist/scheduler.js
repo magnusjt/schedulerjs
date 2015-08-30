@@ -3,7 +3,7 @@ var schedulerjsTemplates = (function() {
   
 var t = {
   /* jshint ignore:start */
-  'layout' : new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"sjs-wrapper\">\r");t.b("\n" + i);t.b("    <div class=\"sjs-name-col\">\r");t.b("\n" + i);t.b("        <div class=\"sjs-name-head\"></div>\r");t.b("\n" + i);if(t.s(t.f("names",c,p,1),c,p,0,120,180,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("            <div class=\"sjs-name\">");t.b(t.v(t.f("name",c,p,0)));t.b("</div>\r");t.b("\n" + i);});c.pop();}t.b("    </div>\r");t.b("\n" + i);t.b("    <div class=\"sjs-app-col\">\r");t.b("\n" + i);t.b("        <div class=\"sjs-grid\">\r");t.b("\n" + i);t.b("            <div class=\"sjs-grid-row-head\">\r");t.b("\n" + i);if(t.s(t.f("grid-cols-head",c,p,1),c,p,0,347,507,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                    <div class=\"sjs-grid-col-head\" style=\"width:");t.b(t.v(t.f("width",c,p,0)));t.b("px;\">\r");t.b("\n" + i);t.b("                        ");t.b(t.v(t.f("time",c,p,0)));t.b("\r");t.b("\n" + i);t.b("                    </div>\r");t.b("\n" + i);});c.pop();}t.b("            </div>\r");t.b("\n" + i);if(t.s(t.f("grid-rows",c,p,1),c,p,0,574,813,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                <div class=\"sjs-grid-row\">\r");t.b("\n" + i);if(t.s(t.f("grid-cols",c,p,1),c,p,0,654,761,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                        <div class=\"sjs-grid-col\" style=\"width:");t.b(t.v(t.f("width",c,p,0)));t.b("px;\"></div>\r");t.b("\n" + i);});c.pop();}t.b("                </div>\r");t.b("\n" + i);});c.pop();}t.b("        </div>\r");t.b("\n" + i);t.b("        <div class=\"sjs-grid-overlay\">\r");t.b("\n" + i);t.b("            <div class=\"sjs-grid-overlay-row-head\"></div>\r");t.b("\n" + i);if(t.s(t.f("grid-overlay-rows",c,p,1),c,p,0,978,1563,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                <div class=\"sjs-grid-overlay-row\">\r");t.b("\n" + i);if(t.s(t.f("grid-overlay-cols",c,p,1),c,p,0,1074,1503,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                        <div class=\"sjs-grid-overlay-col ");t.b(t.v(t.f("class",c,p,0)));t.b("\" style=\"width:");t.b(t.v(t.f("width",c,p,0)));t.b("px;margin-left:");t.b(t.v(t.f("margin",c,p,0)));t.b("px;\" title=\"");t.b(t.v(t.f("title",c,p,0)));t.b(" ");t.b(t.v(t.f("start",c,p,0)));t.b("-");t.b(t.v(t.f("end",c,p,0)));t.b("\">\r");t.b("\n" + i);t.b("                            <span class=\"sjs-grid-overlay-col-title\">");t.b(t.v(t.f("title",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("                            <br />\r");t.b("\n" + i);t.b("                            <span class=\"sjs-grid-overlay-col-time\">");t.b(t.v(t.f("start",c,p,0)));t.b("-");t.b(t.v(t.f("end",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("                        </div>\r");t.b("\n" + i);});c.pop();}t.b("                </div>\r");t.b("\n" + i);});c.pop();}t.b("        </div>\r");t.b("\n" + i);t.b("        <div class=\"sjs-fill-height\"></div>\r");t.b("\n" + i);t.b("        <div class=\"sjs-selector\">\r");t.b("\n" + i);t.b("            <div class=\"sjs-selector-edge sjs-selector-left\"></div>\r");t.b("\n" + i);t.b("            <div class=\"sjs-selector-edge sjs-selector-right\"></div>\r");t.b("\n" + i);t.b("            <div class=\"sjs-selector-inner\">\r");t.b("\n" + i);t.b("                <div class=\"sjs-selector-text\">Start</div>\r");t.b("\n" + i);t.b("            </div>\r");t.b("\n" + i);t.b("        </div>\r");t.b("\n" + i);t.b("    </div>\r");t.b("\n" + i);t.b("</div>");return t.fl(); },partials: {}, subs: {  }})
+  'layout' : new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<div class=\"sjs-wrapper\">\r");t.b("\n" + i);t.b("    <div class=\"sjs-name-col\">\r");t.b("\n" + i);t.b("        <div class=\"sjs-name-head\">");t.b(t.v(t.f("head-name",c,p,0)));t.b("</div>\r");t.b("\n" + i);if(t.s(t.f("names",c,p,1),c,p,0,133,193,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("            <div class=\"sjs-name\">");t.b(t.v(t.f("name",c,p,0)));t.b("</div>\r");t.b("\n" + i);});c.pop();}t.b("    </div>\r");t.b("\n" + i);t.b("    <div class=\"sjs-app-col\">\r");t.b("\n" + i);t.b("        <div class=\"sjs-grid\">\r");t.b("\n" + i);t.b("            <div class=\"sjs-grid-row-head\">\r");t.b("\n" + i);if(t.s(t.f("grid-cols-head",c,p,1),c,p,0,360,520,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                    <div class=\"sjs-grid-col-head\" style=\"width:");t.b(t.v(t.f("width",c,p,0)));t.b("px;\">\r");t.b("\n" + i);t.b("                        ");t.b(t.v(t.f("time",c,p,0)));t.b("\r");t.b("\n" + i);t.b("                    </div>\r");t.b("\n" + i);});c.pop();}t.b("            </div>\r");t.b("\n" + i);if(t.s(t.f("grid-rows",c,p,1),c,p,0,587,826,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                <div class=\"sjs-grid-row\">\r");t.b("\n" + i);if(t.s(t.f("grid-cols",c,p,1),c,p,0,667,774,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                        <div class=\"sjs-grid-col\" style=\"width:");t.b(t.v(t.f("width",c,p,0)));t.b("px;\"></div>\r");t.b("\n" + i);});c.pop();}t.b("                </div>\r");t.b("\n" + i);});c.pop();}t.b("        </div>\r");t.b("\n" + i);t.b("        <div class=\"sjs-grid-overlay\">\r");t.b("\n" + i);t.b("            <div class=\"sjs-grid-overlay-row-head\"></div>\r");t.b("\n" + i);if(t.s(t.f("grid-overlay-rows",c,p,1),c,p,0,991,1608,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                <div class=\"sjs-grid-overlay-row\">\r");t.b("\n" + i);if(t.s(t.f("grid-overlay-cols",c,p,1),c,p,0,1087,1548,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("                        <div class=\"sjs-grid-overlay-col ");t.b(t.v(t.f("class",c,p,0)));t.b("\" style=\"width:");t.b(t.v(t.f("width",c,p,0)));t.b("px;margin-left:");t.b(t.v(t.f("margin",c,p,0)));t.b("px;\" title=\"");t.b(t.v(t.f("title",c,p,0)));t.b(" ");t.b(t.v(t.f("start",c,p,0)));t.b("-");t.b(t.v(t.f("end",c,p,0)));t.b("\" data-payload-id=\"");t.b(t.v(t.f("payloadId",c,p,0)));t.b("\">\r");t.b("\n" + i);t.b("                            <span class=\"sjs-grid-overlay-col-title\">");t.b(t.v(t.f("title",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("                            <br />\r");t.b("\n" + i);t.b("                            <span class=\"sjs-grid-overlay-col-time\">");t.b(t.v(t.f("start",c,p,0)));t.b("-");t.b(t.v(t.f("end",c,p,0)));t.b("</span>\r");t.b("\n" + i);t.b("                        </div>\r");t.b("\n" + i);});c.pop();}t.b("                </div>\r");t.b("\n" + i);});c.pop();}t.b("        </div>\r");t.b("\n" + i);t.b("        <div class=\"sjs-fill-height\"></div>\r");t.b("\n" + i);t.b("        <div class=\"sjs-selector\">\r");t.b("\n" + i);t.b("            <div class=\"sjs-selector-edge sjs-selector-left\"></div>\r");t.b("\n" + i);t.b("            <div class=\"sjs-selector-edge sjs-selector-right\"></div>\r");t.b("\n" + i);t.b("            <div class=\"sjs-selector-inner\">\r");t.b("\n" + i);t.b("                <div class=\"sjs-selector-text\">Start</div>\r");t.b("\n" + i);t.b("            </div>\r");t.b("\n" + i);t.b("        </div>\r");t.b("\n" + i);t.b("    </div>\r");t.b("\n" + i);t.b("</div>");return t.fl(); },partials: {}, subs: {  }})
   /* jshint ignore:end */
 },
 r = function(n) {
@@ -37,6 +37,8 @@ return {
         /** List of names with appointments */
         this.nameList = [];
 
+        this.payloadById = {};
+
         this.createView();
         this.setListeners();
 
@@ -57,6 +59,8 @@ return {
         'pixelsPerHour': 200,
         'snapTo': 5,
         'steps': ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
+        'headName': 'Names',
+        'onClickAppointment': function(){},
         'list': []
     };
 
@@ -85,9 +89,19 @@ return {
         },
         "update": function(list){
             this.nameList = [];
+            this.payloadById = {};
             this.opts.list = list;
             this.createView();
             this.updateSelector();
+        },
+        "showSelector": function(){
+            this.element.find('.sjs-selector').show();
+        },
+        "hideSelector": function(){
+            this.element.find('.sjs-selector').hide();
+        },
+        "toggleSelector": function(){
+            this.element.find('.sjs-selector').toggle();
         }
     };
 
@@ -153,6 +167,13 @@ return {
                 $selector = null;
                 $edgeLeft = null;
                 $edgeRight = null;
+            }
+        });
+
+        this.element.on('click', '.sjs-grid-overlay-col', function(e){
+            var payloadId = $(this).data('payload-id');
+            if(that.payloadById.hasOwnProperty(payloadId) && that.payloadById[payloadId] !== undefined){
+                that.opts.onClickAppointment(that.payloadById[payloadId]);
             }
         });
     };
@@ -274,6 +295,7 @@ return {
      */
     Scheduler.prototype.getGridOverlayRowData = function(){
         var gridOverlayRows = [];
+        var payloadId = 0;
         for (var i = 0; i <  this.opts.list.length; i++) {
             var prevEnd = this.minMinutes;
 
@@ -301,14 +323,27 @@ return {
                 var lengthSinceLast = minutesStart - prevEnd;
                 prevEnd = minutesEnd;
 
+                var className = '';
+                if(appointment.payload !== undefined){
+                    className += 'sjs-grid-overlay-col-clickable ';
+                }
+                if(appointment.class !== undefined){
+                    className += appointment.class;
+                }
+
+                this.payloadById[payloadId] = appointment.payload;
+
                 gridOverlayCols.push({
                     'width': this.minutesToPixels(length),
                     'margin': this.minutesToPixels(lengthSinceLast),
-                    'class': appointment.class === undefined ? '' : appointment.class,
+                    'class': className,
                     'title': appointment.title,
                     'start': appointment.start,
-                    'end': appointment.end
+                    'end': appointment.end,
+                    'payloadId': payloadId
                 });
+
+                payloadId++;
             }
 
             gridOverlayRows.push({
@@ -343,6 +378,7 @@ return {
 
         this.element.html(schedulerjsTemplates.layout({
             'names': this.nameList,
+            'head-name': this.opts.headName,
             'grid-cols-head': gridColsHead,
             'grid-rows': gridRows,
             'grid-overlay-rows': this.getGridOverlayRowData()

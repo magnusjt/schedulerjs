@@ -10,6 +10,7 @@
         Or
         <script src="../dist/scheduler.min.js"></script>
     -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../dist/scheduler.css">
     <style>
         .meeting{
@@ -21,22 +22,31 @@
         .racing{
             background-color: rgba(0, 79, 255, 0.3);
         }
+        #scheduler{
+            border: 1px solid #e7e7e7;
+        }
     </style>
 </head>
 <body>
-    <p>Welcome to the scheduler test page</p>
-    <div id="scheduler"></div>
-    <p>Here's some text below the scheduler</p>
-    <button id="times-button">Get selected times</button>
-    <div id="times"></div>
+    <div class="container">
+    <h3>Welcome to the scheduler test page</h3>
+        <div id="scheduler"></div>
+        <h3>Selected times</h3>
+        <button id="times-button" class="btn btn-default">Get selected times</button>
+        <div id="times"></div>
+        <h3>Show/hide selector</h3>
+        <button id="toggle-selector-button" class="btn btn-default">Toggle selector</button>
+        <h3>Callback on appointment click</h3>
+        <pre id="onClickAppointment"></pre>
+    </div>
     <script>
         $(document).ready(function(){
             var list = [
                 {
                     'name': 'Chewbacca',
                     'appointments': [
-                        {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises',             'class': 'nonsense'},
-                        {'start': '08:50', 'end': '10:10', 'title': 'Somehow Han Solo understands me', 'class': 'nonsense'}
+                        {'start': '08:05', 'end': '09:00', 'title': 'Make strange noises',             'class': 'nonsense', 'payload': {myId: 1}},
+                        {'start': '08:50', 'end': '10:10', 'title': 'Somehow Han Solo understands me', 'class': 'nonsense', 'payload': {myId: 2}}
                     ]
                 },
                 {
@@ -76,12 +86,18 @@
                 '17:00'
             ];
 
+            var onClickAppointment = function(payload){
+                $("#onClickAppointment").html(JSON.stringify(payload));
+            };
+
             var $scheduler = $("#scheduler").schedulerjs({
                 'list': list,
                 'steps': steps,
-                'pixelsPerHour': 180,
+                'pixelsPerHour': 140,
                 'start': '09:30',
-                'end': '10:30'
+                'end': '10:30',
+                'headName': 'Members',
+                'onClickAppointment': onClickAppointment
             });
 
             // Change time after initialization
@@ -91,6 +107,14 @@
             $("#times-button").click(function(){
                 var times = $scheduler.schedulerjs('selected');
                 $("#times").html(times.start + ' - ' + times.end);
+            });
+
+            $("#toggle-selector-button").click(function(){
+                $scheduler.schedulerjs('toggleSelector');
+
+                // Also possible:
+                // $scheduler.schedulerjs('showSelector');
+                // $scheduler.schedulerjs('hideSelector');
             });
 
             /* Update list

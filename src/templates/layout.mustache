@@ -1,6 +1,6 @@
 <div class="sjs-wrapper">
     <div class="sjs-name-col">
-        <div class="sjs-name-head"></div>
+        <div class="sjs-name-head">{{head-name}}</div>
         {{#names}}
             <div class="sjs-name">{{name}}</div>
         {{/names}}
@@ -27,7 +27,7 @@
             {{#grid-overlay-rows}}
                 <div class="sjs-grid-overlay-row">
                     {{#grid-overlay-cols}}
-                        <div class="sjs-grid-overlay-col {{class}}" style="width:{{width}}px;margin-left:{{margin}}px;" title="{{title}} {{start}}-{{end}}">
+                        <div class="sjs-grid-overlay-col {{class}}" style="width:{{width}}px;margin-left:{{margin}}px;" title="{{title}} {{start}}-{{end}}" data-payload-id="{{payloadId}}">
                             <span class="sjs-grid-overlay-col-title">{{title}}</span>
                             <br />
                             <span class="sjs-grid-overlay-col-time">{{start}}-{{end}}</span>
